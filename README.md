@@ -52,7 +52,30 @@ providing the multiple task Dockerfiles may suffice.
 ## Questions these examples should answer
 
 * I have a Slicer CLI, how do I get it to an ingestible Dockerfile?
+
 * How do you build your Dockerfile locally for item_tasks ingest?
+
+This will follow an example using the item_tasks devops VM.
+
+There is a built in demo Dockerfile that is part of item_tasks plugin in Girder.  This is an example task that you can build locally and then ingest.
+
+To follow this example, in your terminal:
+
+# ssh into the vagrant machine from the girder/plugins/item_tasks/devops folder on your host
+vagrant ssh
+# change to worker user
+sudo su worker
+# go to the correct directory where the demo Dockerfile lives
+cd girder/plugins/item_tasks/demo/
+# build the Docker image
+docker build . -t demo
+# you can see the new image as name=demo tag=latest
+docker images
+
+Then in your browser, add a new task to a folder, give it the name "demo", and be sure to uncheck the checkbox to pull from Dockerhub.  This should import the new Docker image task as a new item_tasks task.  I would kind of expect this to work if you try to ingest "demo:latest", but it fails for some reason.
+
+TODO: why does this fail?
+
 * How do you push your Dockerfile to DockerHub for item_tasks ingest?
 * How do you set permission flags on tasks?  Refer to item_tasks plugin docs.
 * What should an item_tasks Dockerfile do with various args?  An opportunity to talk about conventions/expectations.
