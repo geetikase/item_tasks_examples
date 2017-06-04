@@ -44,7 +44,7 @@ Having a Dockerfile with a single task and a Dockerfile with multiple tasks are 
 providing the multiple task Dockerfiles may suffice.
 
 * R example, perhaps linear regression
-* Python example, a wordcount example
+* Python example, of a wordcount and top n wordcount tasks
 * Python Slicer CLI
 * C++ Slicer CLI
 * GPU/CUDA example
