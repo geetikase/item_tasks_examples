@@ -4,7 +4,7 @@ built into a Dockerfile, inside the `task` directory.
 The base Docker image is [python:3.4-onbuild](https://github.com/docker-library/python/blob/master/3.4/onbuild/Dockerfile),
 which when built will copy all of files from the directory containing the Dockerfile into a work
 directory on the Docker image, then pip install the requirements.txt into that Docker image. In 
-the case of this example, `requirements.txt` is empty. Then the build Docker image will have an
+the case of this example, `requirements.txt` is empty. Then the built Docker image will have an
 entrypoint that will execute Python 3.4 on the `wordcount` module, which will run `__main__.py`.
 
 When the `wordcount` module is run with no arguments, it will print out the `spec.json` file
@@ -26,7 +26,7 @@ docker run wordcount
 ```
 
 At this point, you can ingest the wordcount Docker image into your item_tasks, by adding
-a local (meaning do not check "pull from DockerHub") task in the Girder UI for `wordcount`.
+a local (meaning do not check "Pull image from Docker Hub") task in the Girder UI for `wordcount`.
 
 item_tasks will call the Docker container with no arguments, producing the JSON spec, and
 parse this JSON spec to create two new tasks.
@@ -66,7 +66,7 @@ is the same as the argument to the `container_args` line of `"$input{wordlistfil
 Similarly, the outputs show a single output that is a file, and whose id is `wordcounts`,
 which is the same as the argument to the `container_args` line of `"/mnt/girder_worker/data/wordcounts"`.
 item_tasks will automatically mount any input and output files to /mnt/girder_worker/data, which is how
-we end up with the full path of /mnt/girder_worker/data/wordcounts.  See the [Girder-Worker docs](http://girder-worker.readthedocs.io/en/latest/plugins.html#docker) for more details.
+we end up with the full path of /mnt/girder_worker/data/wordcounts.  See the [Girder-Worker Docker mode docs](http://girder-worker.readthedocs.io/en/latest/plugins.html#docker) for more details.
 
 ```
     "outputs": [
@@ -95,6 +95,6 @@ in the output file.
 To run this task, first build the Dockerfile, then ingest it to your item_tasks
 Girder instance.  There is an example input file included at `test_data/words.txt`, 
 which was derived from the Wikipedia entry on [Wessex Lane Halls](https://en.wikipedia.org/wiki/Wessex_Lane_Halls),
-which was found by looking through random articles until one was found of sufficient length and inoffensiveness.
+selected by looking through random articles until one was found of sufficient length and inoffensiveness.
 You can upload this example file to your Girder instance and use it as an input to either
 the `wordcount` or `topwordcount` tasks.
