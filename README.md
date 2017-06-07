@@ -61,6 +61,7 @@ There is a built in demo Dockerfile that is part of item_tasks plugin in Girder.
 
 To follow this example, in your terminal:
 
+```
 # ssh into the vagrant machine from the girder/plugins/item_tasks/devops folder on your host
 vagrant ssh
 # change to worker user
@@ -71,6 +72,7 @@ cd girder/plugins/item_tasks/demo/
 docker build . -t demo
 # you can see the new image as name=demo tag=latest
 docker images
+```
 
 Then in your browser, add a new task to a folder, give it the name "demo", and be sure to uncheck the checkbox to pull from Dockerhub.  This should import the new Docker image task as a new item_tasks task.  I would kind of expect this to work if you try to ingest "demo:latest", but it fails for some reason.
 
