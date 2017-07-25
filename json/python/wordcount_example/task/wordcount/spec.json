@@ -1,0 +1,71 @@
+[
+  {
+    "name": "wordcount",
+    "description": "Python JSON wordcount example to be run on a file with one word per line",
+    "mode": "docker",
+    "pull_image": false,
+    "container_args": [
+      "wordcount",
+      "$input{wordlistfile}",
+      "/mnt/girder_worker/data/wordcounts"
+    ],
+    "inputs": [
+      {
+        "description": "",
+        "target": "filepath",
+        "required": true,
+        "type": "file",
+        "id": "wordlistfile",
+        "name": "The input word list file, with one word per line"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "wordcounts",
+        "name": "Word counts",
+        "description": "Choose a directory and name for the output item",
+        "type": "new-file",
+        "target": "filepath"
+      }
+    ]
+  },
+  {
+    "name": "topwordcount",
+    "description": "Python JSON top n wordcount example to be run on a file with one word per line",
+    "mode": "docker",
+    "pull_image": false,
+    "container_args": [
+      "topwordcount",
+      "$input{wordlistfile}",
+      "$input{top_n}",
+      "/mnt/girder_worker/data/topwordcounts"
+    ],
+    "inputs": [
+      {
+        "description": "",
+        "target": "filepath",
+        "required": true,
+        "type": "file",
+        "id": "wordlistfile",
+        "name": "The input word list file, with one word per line"
+      }, {
+        "id": "top_n",
+        "name": "n most frequent words",
+        "description": "Provide an integer",
+        "type": "integer",
+        "default": {
+          "data": 10
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "topwordcounts",
+        "name": "Top n word counts",
+        "description": "Choose a directory and name for the output item",
+        "type": "new-file",
+        "target": "filepath"
+      }
+    ]
+  }
+]
